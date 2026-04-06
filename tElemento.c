@@ -49,7 +49,7 @@ float getCoeficiente(tElemento e) {
     return e.coficiente;
 }
 
-void derivada(tElemento *ed, tElemento e){
+void derivada_elemento(tElemento *ed, tElemento e){
     if (e.termino > 0) {
         ed->termino = e.termino-1;
         ed->coficiente = e.coficiente*e.termino;

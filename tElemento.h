@@ -39,7 +39,7 @@ int getExponente(tElemento e);
 // Devuelve el coeficiente de un termino
 float getCoeficiente(tElemento e);
 // Devuelve la derivada de un termino
-void derivada(tElemento *ed, tElemento e);
+void derivada_elemento(tElemento *ed, tElemento e);
 
 
 #endif //EJ_TELEMENTO_H
