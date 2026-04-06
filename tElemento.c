@@ -1,28 +1,60 @@
 /********************************************************************************
 Módulo:
-Fichero: ( ) Programa  ( ) Espec. TAD ( ) Impl. TAD
+Fichero: ( ) Programa  ( ) Espec. TAD (x) Impl. TAD
 Autor: Jose Miguel Villora
 Fecha: 07/04/2026
 Descripción:
+Este fichero implementa el TAD tElemento, que representa un término
+individual de un polinomio. Cada elemento está formado por un coeficiente
+real y un exponente entero. En este módulo se definen las operaciones
+básicas sobre los elementos, como la asignación, lectura, comparación,
+obtención de atributos y el cálculo de la derivada de un término.
+Estas operaciones permiten su uso dentro de una lista ordenada para la
+gestión y manipulación de polinomios.
 *********************************************************************************/
 
 #include "tElemento.h"
+#include <stdio.h>
 
-void asignarElemento(tElemento *e1, tElemento e2);
-// Lee por teclado un TElemento
-void leerElemento(tElemento *e);
-// Comprueba si dos TElemento son iguales. Dos términos se consideran
-// iguales si tienen el mismo exponente
-int igualElemento(tElemento uno, tElemento dos);
-// Comprueba si elem1 es mayor que elem2 (se considera que un termino
-//es mayor que otro si el exponente del primero es mayor que el
-//exponente del segundo
-int mayor(tElemento uno, tElemento dos);
-// Muestra por pantalla un TElemento
-void mostrarElemento(tElemento t);
-// Devuelve el exponente de un termino
-int getExponente(tElemento e);
-// Devuelve el coeficiente de un termino
-float getCoeficiente(tElemento e);
-// Devuelve la derivada de un termino
-void derivada(tElemento *ed, tElemento e);
+void asignarElemento(tElemento *e1, tElemento e2) {
+    e1->coficiente = e2.coficiente;
+    e1->termino = e2.termino;
+}
+
+void leerElemento(tElemento *e) {
+    printf("Ingrese el coficiente del elemento \n");
+    scanf("%f", &e->coficiente);
+    printf("Ingrese el termino del elemento \n");
+    scanf("%d", &e->termino);
+}
+
+int igualElemento(tElemento uno, tElemento dos) {
+    return uno.coficiente == dos.coficiente && uno.termino == dos.termino;
+}
+
+int mayor(tElemento uno, tElemento dos) {
+    return uno.coficiente > dos.coficiente;
+}
+
+void mostrarElemento(tElemento t) {
+    printf("Termino: %d \n", t.termino);
+    printf("Coficiente: %.2f\n", t.coficiente);
+}
+
+int getExponente(tElemento e) {
+    return e.termino;
+}
+
+float getCoeficiente(tElemento e) {
+    return e.coficiente;
+}
+
+void derivada(tElemento *ed, tElemento e){
+    if (e.termino > 0) {
+        ed->termino = e.termino-1;
+        ed->coficiente = e.coficiente*e.termino;
+    } else {
+        ed->coficiente = 0;
+        ed->termino = 1;
+    }
+}

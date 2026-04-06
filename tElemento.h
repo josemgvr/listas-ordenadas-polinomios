@@ -1,9 +1,16 @@
 /********************************************************************************
 Módulo:
-Fichero: ( ) Programa  ( ) Espec. TAD ( ) Impl. TAD
+Fichero: ( ) Programa  ( ) Espec. TAD (x) Impl. TAD
 Autor: Jose Miguel Villora
 Fecha: 07/04/2026
 Descripción:
+Este fichero implementa el TAD tElemento, que representa un término
+individual de un polinomio. Cada elemento está formado por un coeficiente
+real y un exponente entero. En este módulo se definen las operaciones
+básicas sobre los elementos, como la asignación, lectura, comparación,
+obtención de atributos y el cálculo de la derivada de un término.
+Estas operaciones permiten su uso dentro de una lista ordenada para la
+gestión y manipulación de polinomios.
 *********************************************************************************/
 
 #ifndef EJ_TELEMENTO_H
