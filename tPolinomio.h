@@ -25,6 +25,9 @@ typedef struct Nodo {
 
 typedef tNodo* tPolinomio;
 
+void CrearVacia(tPolinomio *p);
+int EsVacia(tPolinomio p);
+
 // Lee por teclado un polinomio
 tPolinomio *leerPolinomio();
 // Muestra por pantalla un polinomio
