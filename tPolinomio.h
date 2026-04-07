@@ -27,6 +27,8 @@ typedef tNodo* tPolinomio;
 
 void CrearVacia(tPolinomio *p);
 int EsVacia(tPolinomio p);
+void construir(tPolinomio* p, tElemento e1);
+
 
 // Lee por teclado un polinomio
 tPolinomio *leerPolinomio();
