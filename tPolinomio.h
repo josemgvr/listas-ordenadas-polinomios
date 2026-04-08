@@ -25,19 +25,33 @@ typedef struct Nodo {
 
 typedef tNodo* tPolinomio;
 
+//Crea un polinomio Vacio
 void CrearVacia(tPolinomio *p);
+
+//Comprueba que el polinomio esta vacia
 int EsVacia(tPolinomio p);
+
+//Crear o añade un elemento al polinomio
 void construir(tPolinomio* p, tElemento e1);
 
+//Elimina un Nodo del tPolinomio
+void EliminarElemento(tPolinomio *p, tElemento e);
+
+//Elimina enteramente el polinomio
+void EliminartPolinomio(tPolinomio *p);
 
 // Lee por teclado un polinomio
 tPolinomio *leerPolinomio();
+
 // Muestra por pantalla un polinomio
 void mostrar(tPolinomio p);
+
 // Devuelve la derivada de un polinomio
 void derivada_polinomio(tPolinomio *pd, tPolinomio p);
+
 // Devuelve el valor de un polinomio aplicado a un valor x
 float valor(tPolinomio p, float x);
+
 // Devuelve la suma de dos polinomios
 void sumarPolinomios(tPolinomio *s, tPolinomio p1, tPolinomio p2);
 

@@ -20,14 +20,17 @@ y estructurada.
 #include <stdlib.h>
 #include <math.h>
 
+//Crea un polinomio Vacio
 void CrearVacia(tPolinomio *p) {
   *p = NULL;
 }
 
+//Comprueba que el polinomio esta vacia
 int EsVacia(tPolinomio p) {
   return p == NULL;
 }
 
+//Crear o añade un elemento al polinomio
 void construir(tPolinomio* p, tElemento e1) {
   tNodo* act = *p;
   tNodo* ant = NULL;
@@ -47,12 +50,51 @@ void construir(tPolinomio* p, tElemento e1) {
   nuevo->sig = act;
 }
 
+//Elimina un Nodo del tPolinomio
+void EliminarElemento(tPolinomio *p, tElemento e) {
+  tNodo * act = *p;
+  tNodo * ant = NULL;
+  int encontrado = 0;
+
+  while (act != NULL && !encontrado) {
+    if (igualElemento(act->info, e)) {
+      encontrado = 1;
+    } else {
+      ant = act;
+      act = act->sig;
+    }
+
+  }
+
+  if (act != NULL) {
+    if (ant != NULL) {
+      ant->sig = act->sig;
+    } else {
+      *p = act->sig;
+    }
+    free(act);
+  }
+}
+
+//Elimina enteramente el polinomio
+void EliminarPolinomio(tPolinomio *p) {
+  tNodo *act = *p;
+  tNodo *aux;
+
+  while (act != NULL) {
+    aux = act;
+    act = act->sig;
+    free(aux);
+  }
+  *p = NULL;
+}
+
+
 // Lee por teclado un polinomio
 tPolinomio *leerPolinomio() {
   char seleccion;
-  tPolinomio *p;
+  tPolinomio *p = (tPolinomio*) malloc(sizeof(tPolinomio));
   tElemento e;
-  tNodo* nuevo = (tNodo*) malloc(sizeof(tNodo));
   CrearVacia(p);
 
   printf("Ingrese el PRIMER elemento: \n");
@@ -80,7 +122,7 @@ tPolinomio *leerPolinomio() {
 // Muestra por pantalla un polinomio
 void mostrar(tPolinomio p) {
   tNodo * act = p;
-  int i;
+  int i = 0;
   while (act != NULL) {
     printf("El %d elemento es: \n", i+1);
     mostrarElemento(act->info);
@@ -94,7 +136,7 @@ void derivada_polinomio(tPolinomio *pd, tPolinomio p) {
   tNodo * act = p;
   tElemento e;
   while (act != NULL) {
-    derivada_elemento(&e, p->info);
+    derivada_elemento(&e, act->info);
     construir(pd, e);
     act = act->sig;
   }
@@ -108,7 +150,7 @@ float valor(tPolinomio p, float x) {
   float resultado = 0;
 
   while (act != NULL) {
-    resultado += getCoeficiente(p->info)*pow(x,getExponente(p->info));
+    resultado += getCoeficiente(act->info)*pow(x,getExponente(act->info));
     act = act->sig;
   }
   return resultado;
@@ -119,14 +161,18 @@ void sumarPolinomios(tPolinomio *s, tPolinomio p1, tPolinomio p2) {
   tNodo * act2 = p2;
   tElemento e;
   int exponente;
-  float coficiente;
+
+  CrearVacia(s);
 
   while (act1 != NULL && act2 != NULL) {
     if (getExponente(act1->info) == getExponente(act2->info)) {
       exponente = getExponente(act1->info);
-      coficiente = getCoeficiente(act1->info) + getCoeficiente(act2->info);
-      contruirElemento(coficiente,exponente,&e);
-      construir(s, e);
+      float coeficiente = getCoeficiente(act1->info) + getCoeficiente(act2->info);
+      if (coeficiente != 0) {
+        construirElemento(coeficiente,exponente,&e);
+        construir(s, e);
+      }
+
       act1 = act1->sig;
       act2 = act2->sig;
     } else if (getExponente(act1->info) > getExponente(act2->info)) {
@@ -136,5 +182,17 @@ void sumarPolinomios(tPolinomio *s, tPolinomio p1, tPolinomio p2) {
       construir(s, act2->info);
       act2 = act2->sig;
     }
+
+    while (act1 != NULL) {
+      construir(s, act1->info);
+      act1 = act1->sig;
+    }
+
+    while (act2 != NULL) {
+      construir(s, act2->info);
+      act2 = act2->sig;
+    }
+
   }
 }
+
