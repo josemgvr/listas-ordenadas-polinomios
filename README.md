@@ -1,142 +1,118 @@
-\# Listas ordenadas y polinomios
+# 📐 Listas Ordenadas y Polinomios en C
 
+Implementación en **C** del TAD Lista Ordenada aplicado a la representación y manipulación algebraica de **polinomios**. Cada polinomio se modela como una lista enlazada ordenada de términos (coeficiente + exponente), mantenida siempre en **orden decreciente de exponente** y sin exponentes repetidos.
 
+> Proyecto académico para la práctica de estructuras de datos dinámicas y Tipos Abstractos de Datos (TAD).
 
-Implementación en C del \*\*TAD Lista Ordenada\*\* aplicado a la
+---
 
-representación y manipulación de \*\*polinomios\*\*.
+## 📋 Tabla de contenidos
 
+- [Descripción](#-descripción)
+- [Estructura del proyecto](#-estructura-del-proyecto)
+- [Funcionalidades](#-funcionalidades)
+- [Ejemplo de uso](#-ejemplo-de-uso)
+- [Compilación y ejecución](#️-compilación-y-ejecución)
+- [Requisitos](#-requisitos)
 
+---
 
-Un polinomio se define como una lista ordenada de términos, organizada
+## 📖 Descripción
 
-en \*\*orden decreciente según el exponente\*\*, donde cada término está
+Un **polinomio** se representa internamente como una lista enlazada ordenada de términos, donde cada nodo almacena un par `(coeficiente, exponente)`. La lista se mantiene ordenada de mayor a menor exponente, y no se permiten exponentes duplicados.
 
-formado por un coeficiente real y un exponente entero.  
+Este diseño permite implementar operaciones algebraicas (suma, derivada, evaluación) de forma eficiente y estructurada, aplicando los principios de abstracción propios del paradigma TAD.
 
-El objetivo principal del proyecto es practicar el uso de \*\*estructuras
+---
 
-de datos dinámicas\*\* y \*\*Tipos Abstractos de Datos (TAD)\*\* para resolver
+## 🗂 Estructura del proyecto
 
-un problema concreto de forma estructurada y eficiente.
+```
+listas-ordenadas-polinomios/
+├── main.c           # Programa principal de prueba
+├── tElemento.h      # Interfaz del TAD tElemento (término del polinomio)
+├── tElemento.c      # Implementación del TAD tElemento
+├── tPolinomio.h     # Interfaz del TAD tPolinomio
+├── tPolinomio.c     # Implementación del TAD tPolinomio (lista ordenada)
+├── CMakeLists.txt   # Configuración de compilación con CMake
+└── .gitignore
+```
 
+| Módulo | Responsabilidad |
+|---|---|
+| `tElemento` | Representa un término: coeficiente (`float`) y exponente (`int`) |
+| `tPolinomio` | Gestiona la lista ordenada de términos y sus operaciones |
+| `main.c` | Programa de prueba interactivo |
 
+---
 
-\---
+## ✅ Funcionalidades
 
+- **Lectura interactiva** de un polinomio desde teclado, término a término
+- **Representación** del polinomio como lista enlazada ordenada por exponente
+- **Suma** de dos polinomios, agrupando términos con igual exponente
+- **Derivada** de un polinomio aplicando la regla de la potencia
+- **Evaluación** de un polinomio `p(x)` para un valor real `x` dado
+- **Liberación de memoria** al finalizar (sin fugas de memoria)
 
+---
 
-\## Estructuras de datos utilizadas
+## 💻 Ejemplo de uso
 
+```
+Introduce el primer polinomio:
+> 3x^4 - 2x^2 + x - 5
 
+Introduce el segundo polinomio:
+> x^3 + 4x - 1
 
-\- Lista enlazada ordenada
+Polinomio 1:   3.00x^4 - 2.00x^2 + 1.00x - 5.00
+Polinomio 2:   1.00x^3 + 4.00x - 1.00
 
-\- Tipos de Datos Abstractos (TAD)
+Derivada del primer polinomio:
+  12.00x^3 - 4.00x + 1.00
 
-\- Estructuras dinámicas
+Introduce un valor para x: 2
+Valor del polinomio 1 en x = 2.00: 37.00
 
+Suma de los polinomios:
+  3.00x^4 + 1.00x^3 - 2.00x^2 + 5.00x - 6.00
+```
 
+---
 
-La lista se mantiene siempre ordenada por exponente y no se permiten
+## ⚙️ Compilación y ejecución
 
-exponentes repetidos, lo que facilita la implementación de las
-
-operaciones sobre los polinomios.
-
-
-
-\---
-
-
-
-\## Funcionalidades implementadas
-
-
-
-\- Lectura de un polinomio desde teclado
-
-\- Representación de un polinomio mediante una lista ordenada
-
-\- Cálculo de la derivada de un polinomio
-
-\- Evaluación de un polinomio para un valor dado de `x`
-
-\- Suma de dos polinomios
-
-
-
-\---
-
-
-
-\## Ejemplo de uso
-
-
-
-El programa permite introducir un polinomio por teclado y mostrar por
-
-pantalla su derivada, el valor del polinomio para un determinado valor
-
-de `x` y la suma con un segundo polinomio introducido por el usuario.
-
-
-
-\---
-
-
-
-\## Estructura del proyecto
-
-
-
-\- `listaOrdenada.h / .c`  
-
-&#x20; Implementación del TAD \*\*Lista Ordenada\*\*
-
-
-
-\- `tElemento.h / .c`  
-
-&#x20; Implementación del TAD `tElemento`, que representa un término del
-
-&#x20; polinomio (coeficiente y exponente)
-
-
-
-\- `tPolinomio.h / .c`  
-
-&#x20; Implementación del TAD `tPolinomio`, que gestiona las operaciones sobre
-
-&#x20; polinomios utilizando una lista ordenada de términos
-
-
-
-\- `main.c`  
-
-&#x20; Programa principal de prueba del TAD `tPolinomio`
-
-
-
-\- `CMakeLists.txt`  
-
-&#x20; Archivo de configuración para la compilación del proyecto
-
-
-
-\---
-
-
-
-\## Compilación y ejecución
-
-
-
-\### Compilación con gcc
-
-
+### Con GCC (línea de comandos)
 
 ```bash
+gcc *.c -o polinomios
+./polinomios
+```
 
-gcc \*.c -o polinomios
+### Con CMake
 
+```bash
+mkdir build && cd build
+cmake ..
+make
+./polinomios
+```
+
+---
+
+## 📦 Requisitos
+
+- Compilador C (GCC, Clang o compatible con C99)
+- CMake 3.x *(opcional, solo si se usa el método CMake)*
+- Sistema operativo: Linux, macOS o Windows (con MinGW/WSL)
+
+---
+
+## 📚 Conceptos aplicados
+
+- Tipos Abstractos de Datos (TAD)
+- Listas enlazadas dinámicas
+- Gestión manual de memoria (`malloc` / `free`)
+- Modularidad y separación de interfaz e implementación (`.h` / `.c`)
+- Operaciones algebraicas sobre polinomios
