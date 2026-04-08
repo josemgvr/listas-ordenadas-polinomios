@@ -31,38 +31,19 @@ void construir(tPolinomio* p, tElemento e1) {
   tNodo* act = *p;
   tNodo* ant = NULL;
   tNodo* nuevo = (tNodo*) malloc(sizeof(tNodo));
-  int insertado = 0;
-
   asignarElemento(&nuevo->info, e1);
-  while (act != NULL && insertado == 0) {
-    if (getExponente(e1) > getExponente(act->info)) {
 
-      if (act = *p) { //Compruebas que sea el primero
-        nuevo->sig = act;
-        *p = nuevo;
-        insertado = 1;
-      } else { //Otros casos, esta en el medio
-        nuevo->sig = act;
-        ant->sig = nuevo;
-        insertado = 1;
-      }
-
-    }
-
-    if (getExponente(e1) == getExponente(act->info)) {
-      nuevo->sig = act->sig;
-      act->sig = nuevo;
-      insertado = 1;
-    }
-
-    if (act->sig == NULL) {
-      act->sig = nuevo;
-      nuevo->sig = NULL;
-      insertado = 1;
-    }
+  while (act != NULL && mayor(act->info, e1)) {
     ant = act;
     act = act->sig;
   }
+
+  if (ant == NULL) {
+    *p = nuevo;
+  } else {
+    ant->sig = nuevo;
+  }
+  nuevo->sig = act;
 }
 
 // Lee por teclado un polinomio
