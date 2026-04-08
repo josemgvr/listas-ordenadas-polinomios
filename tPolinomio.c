@@ -18,6 +18,7 @@ y estructurada.
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 void CrearVacia(tPolinomio *p) {
   *p = NULL;
@@ -91,14 +92,49 @@ void mostrar(tPolinomio p) {
 // Devuelve la derivada de un polinomio
 void derivada_polinomio(tPolinomio *pd, tPolinomio p) {
   tNodo * act = p;
-
+  tElemento e;
   while (act != NULL) {
+    derivada_elemento(&e, p->info);
+    construir(pd, e);
     act = act->sig;
   }
 
 }
 
 // Devuelve el valor de un polinomio aplicado a un valor x
-float valor(tPolinomio p, float x);
+float valor(tPolinomio p, float x) {
+  tNodo * act = p;
+  tElemento e;
+  float resultado = 0;
+
+  while (act != NULL) {
+    resultado += getCoeficiente(p->info)*pow(x,getExponente(p->info));
+    act = act->sig;
+  }
+  return resultado;
+}
 // Devuelve la suma de dos polinomios
-void sumarPolinomios(tPolinomio *s, tPolinomio p1, tPolinomio p2);
+void sumarPolinomios(tPolinomio *s, tPolinomio p1, tPolinomio p2) {
+  tNodo * act1 = p1;
+  tNodo * act2 = p2;
+  tElemento e;
+  int exponente;
+  float coficiente;
+
+  while (act1 != NULL && act2 != NULL) {
+    if (getExponente(act1->info) == getExponente(act2->info)) {
+      exponente = getExponente(act1->info);
+      coficiente = getCoeficiente(act1->info) + getCoeficiente(act2->info);
+      contruirElemento(coficiente,exponente,&e);
+      construir(s, e);
+      act1 = act1->sig;
+      act2 = act2->sig;
+    } else if (getExponente(act1->info) > getExponente(act2->info)) {
+      construir(s, act1->info);
+      act1 = act1->sig;
+    } else {
+      construir(s, act2->info);
+      act2 = act2->sig;
+    }
+  }
+}

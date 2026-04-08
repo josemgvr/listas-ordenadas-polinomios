@@ -16,6 +16,11 @@ gestión y manipulación de polinomios.
 #include "tElemento.h"
 #include <stdio.h>
 
+void construirElemento(float coficiente, int termino, tElemento *e){
+    e->termino = termino;
+    e->coficiente = coficiente;
+}
+
 void asignarElemento(tElemento *e1, tElemento e2) {
     e1->coficiente = e2.coficiente;
     e1->termino = e2.termino;

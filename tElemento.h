@@ -21,6 +21,8 @@ typedef struct termino {
     int termino;
 }tElemento;
 
+void contruirElemento(float coficiente, int termino, tElemento *e);
+
 // Asigna el valor de un TElemento a otro TElemento
 void asignarElemento(tElemento *e1, tElemento e2);
 // Lee por teclado un TElemento
